@@ -60,9 +60,22 @@ const addNewMovie = async (req, res) => {
     
 };
 
+const deleteMovie = async (req,res) =>{
+    const {id} = req.params;
+
+    const result = await Movie.destroy({
+        where:{
+            id
+        }
+    });
+
+    if(result) res.send({success: "Movie deleted successfully..."});
+    else res.send({error: "Movie deletion failed"});
+}
 
 module.exports = {
     findAllMovies,
     findByMovieId,
-    addNewMovie
+    addNewMovie,
+    deleteMovie
 }

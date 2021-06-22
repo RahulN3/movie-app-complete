@@ -47,12 +47,15 @@ function MovieList() {
         if(!isEmpty(response)){
             setColor('text-primary');
             setStatus("Movie added Succeefully");
+            toggle()
+            getMovies();
         } else{
             setColor('text-danger');
             setStatus("Movie creation failed");
         }
-    
+        
     }
+
 
     const onChangeInput = (event) => {
         setSearchText(event.target.value);
@@ -89,10 +92,6 @@ function MovieList() {
             addMovies(movieJson);
     }
 
-    const closeModal = () =>{
-        setStatus(' ');
-    }
-
     return (
         <main>
             <Container>
@@ -101,7 +100,7 @@ function MovieList() {
                 }}>
                     <h2>List of Movies</h2>
                     <Form inline>
-                        <Input type="text" onChange={onChangeInput} style={{ width: '80%' }} />
+                        <Input type="text" onChange={onChangeInput} style={{ width: '80%' }} placeholder="Search movie title..."/>
                         <Button color="primary" onClick={onClickSearch}>Search</Button>
                     </Form>
                     <Button className="mt-2" color="primary"  onClick={toggle}>Add Movie</Button>
@@ -124,12 +123,12 @@ function MovieList() {
                         {movies.map((movie, idx) => (
                             <Col md="4" key={idx}>
                                 <Card onClick={() => onClickCard(movie)}>
-                                    <CardHeader>{movie.title}</CardHeader>
+                                    <CardHeader>
+                                       {movie.title}
+                                    </CardHeader>
                                     <CardBody>
                                         {movie.title}
-                                        {/* <a href='/'{movie.title}> */}
                                         <img src={movie.poster} alt="Movie Poster" style={{ width: '100%' }} />
-                                        {/* </a> */}
                                     </CardBody>
                                 </Card>
                             </Col>

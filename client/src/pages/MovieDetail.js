@@ -24,10 +24,23 @@ function MovieDetail() {
         history.push("/");
       };
 
+      const deleteMovie = async () => {
+        const response = await axios({
+            url: `http://localhost:4000/movies/delete/${movieId}`,
+            method: 'delete'
+        });
+        goBack();
+    }
+  
+    const onClickDeleteMovie = () =>{
+        deleteMovie();
+    }
+
     return (
         <div>
             <h2 >Movie Detail Page</h2>
-            <Button color="dark" onClick={goBack}>
+            <span ><Button color="danger"  onClick={onClickDeleteMovie}>Delete</Button></span>
+            <Button style={{marginLeft: "10%"}} color="dark" onClick={goBack}>
               Go Back
             </Button>
             <p>{details.title}</p>
